@@ -1,23 +1,16 @@
-import { serve } from '@hono/node-server';
-import { Hono } from 'hono';
-import { cors } from 'hono/cors';
-import type { Context } from 'hono';
+import express, { Request, Response } from 'express';
+import cors from 'cors';
 
-const app = new Hono();
+const app = express();
 const port = 4000;
 
-// Enable CORS
-app.use('*', cors());
+app.use(cors());
+app.use(express.json());
 
-// API routes
-app.get('/api/status', (c: Context) => {
-  return c.json({ message: 'It works!' });
+app.get('/api/hello', (req: Request, res: Response) => {
+  res.json({ message: 'Hello from the Express backend!' });
 });
 
-// Start the server
-serve({
-  fetch: app.fetch,
-  port
-}, (info: { port: number }) => {
-  console.log(`Backend server running at http://localhost:${info.port}`);
+app.listen(port, () => {
+  console.log(`Backend server running at http://localhost:${port}`);
 });
