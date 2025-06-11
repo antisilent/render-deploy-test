@@ -7,8 +7,8 @@ const port = 4000;
 app.use(cors());
 app.use(express.json());
 
-app.get('/api/hello', (req: Request, res: Response) => {
-  res.json({ message: 'Hello from the Express backend!' });
+app.get('/api/status', (req: Request, res: Response) => {
+  res.json({ message: 'It works!' });
 });
 
 app.listen(port, () => {
