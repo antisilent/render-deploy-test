@@ -4,7 +4,9 @@
   "private": true,
   "scripts": {
     "dev": "pnpm run --parallel dev",
-    "build": "pnpm run --parallel build",
-    "start": "pnpm run --parallel start"
+    "build": "pnpm run build:frontend && pnpm run build:backend",
+    "build:frontend": "cd frontend && pnpm run build",
+    "build:backend": "cd backend && pnpm run build",
+    "start": "NODE_ENV=production pnpm run build:frontend && cd backend && pnpm start"
   }
 }
