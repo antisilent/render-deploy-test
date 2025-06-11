@@ -1,9 +1,10 @@
 {
-  "name": "render-deploy-test",
+  "name": "fullstack-typescript-app",
   "version": "1.0.0",
   "private": true,
   "scripts": {
     "dev": "pnpm run --parallel dev",
-    "build": "pnpm run --parallel build"
+    "build": "pnpm run --parallel build",
+    "start": "pnpm run --parallel start"
   }
 }
