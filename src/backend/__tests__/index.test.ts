@@ -8,14 +8,17 @@ app.use(express.json());
 app.use(cors());
 
 // Add the actual route we want to test
-app.get('/api/health', (req, res) => {
-  res.status(204).send();
+app.get('/api/status', (req, res) => {
+  res.json({ message: 'It works!' });
 });
 
 describe('API Endpoints', () => {
-  it('GET /api/health returns 204', async () => {
-    await request(app)
-      .get('/api/health')
-      .expect(204);
+  it('GET /api/status returns correct message', async () => {
+    const response = await request(app)
+      .get('/api/status')
+      .expect('Content-Type', /json/)
+      .expect(200);
+
+    expect(response.body).toEqual({ message: 'It works!' });
   });
 });
