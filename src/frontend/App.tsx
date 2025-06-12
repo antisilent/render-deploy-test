@@ -4,10 +4,13 @@ const App: React.FC = () => {
   const [message, setMessage] = useState<string>('');
 
   useEffect(() => {
-    fetch('/api/status')
-      .then(res => res.json())
-      .then(data => setMessage(data.message))
-      .catch(err => console.error('Error fetching message:', err));
+    fetch('/api/health')
+      .then(res => {
+        if (res.status === 204) {
+          setMessage('It works!');
+        }
+      })
+      .catch(err => console.error('Error checking health:', err));
   }, []);
 
   return (<h1>{message || 'Loading...'}</h1>);

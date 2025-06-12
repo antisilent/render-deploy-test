@@ -15,8 +15,8 @@ if (!IS_PROD) {
 }
 
 // API routes
-app.get('/api/status', (req: Request, res: Response) => {
-  res.json({ message: 'It works!' });
+app.get('/api/health', (req: Request, res: Response) => {
+  res.status(204).send();
 });
 
 if (IS_PROD) {
