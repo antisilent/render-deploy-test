@@ -1,5 +1,5 @@
 {
-  "name": "fullstack-typescript-app",
+  "name": "render-deploy-test",
   "version": "1.0.0",
   "private": true,
   "scripts": {
@@ -17,6 +17,7 @@
   "dependencies": {
     "cors": "^2.8.5",
     "express": "^4.18.2",
+    "openai": "^5.3.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
   },
