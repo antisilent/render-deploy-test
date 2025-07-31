@@ -38,7 +38,7 @@ The application is organized as a monorepo with the following structure:
 ## Setup
 
 1. Install dependencies:
-```bash
+```zsh
 pnpm install
 ```
 
@@ -48,7 +48,7 @@ pnpm install
    - `PORT`: Server port (defaults to 4000)
 
 3. Start development servers:
-```bash
+```zsh
 pnpm dev
 ```
 
@@ -78,7 +78,7 @@ This will start both the frontend and backend servers concurrently:
 - Coverage reporting
 
 Run tests with:
-```bash
+```zsh
 pnpm test              # Run all tests
 pnpm test:watch        # Run tests in watch mode
 pnpm test:coverage     # Run tests with coverage report
@@ -88,7 +88,7 @@ pnpm test:coverage     # Run tests with coverage report
 
 To build both frontend and backend:
 
-```bash
+```zsh
 pnpm build
 ```
 
