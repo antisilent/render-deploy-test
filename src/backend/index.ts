@@ -1,6 +1,10 @@
-import express, { Request, Response } from 'express';
-import cors from 'cors';
 import path from 'path';
+import cors from 'cors';
+import express, {
+  NextFunction,
+  Request,
+  Response,
+} from 'express';
 import OpenAI from 'openai';
 
 const IS_PROD = process.env.NODE_ENV === 'production';
@@ -13,13 +17,20 @@ if (process.env.DMG_API_KEY || process.env.DMG_API_BASE) {
 
   llm = new OpenAI({ apiKey, baseURL });
 } else {
-  console.warn('No API key or base URL provided. You will be unable to reach the LLM backend.')
+  console.error('No API key or base URL provided. You will be unable to reach the LLM backend.')
 }
 
 const app = express();
 const port = process.env.PORT || 4000;
 
 app.use(express.json());
+app.use((req: Request, res: Response, next: NextFunction) => {
+  res.on('finish', () => {
+    console.info(`${req.method} ${req.originalUrl} → ${res.statusCode}`);
+  });
+
+  next();
+});
 
 // Enable CORS in development
 if (!IS_PROD) {
