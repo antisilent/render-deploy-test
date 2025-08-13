@@ -11,10 +11,10 @@ const IS_PROD = process.env.NODE_ENV === 'production';
 
 let llm: OpenAI | undefined;
 
-if (process.env.DMG_API_KEY || process.env.DMG_API_BASE) {
-  const apiKey = process.env.DMG_API_KEY;
-  const baseURL = process.env.DMG_API_BASE;
+const apiKey = process.env.DMG_API_KEY;
+const baseURL = process.env.DMG_API_BASE;
 
+if (apiKey && baseURL) {
   llm = new OpenAI({ apiKey, baseURL });
 } else {
   console.error('No API key or base URL provided. You will be unable to reach the LLM backend.')
@@ -38,13 +38,26 @@ if (!IS_PROD) {
 }
 
 // API routes
+app.get('/api/config', async (req: Request, res: Response) => {
+  try {
+    res.json({
+      apiKey: !!apiKey ? '*************' : 'not provided',
+      baseURL
+    })
+  } catch (error) {
+    console.error('Error fetching config: ', error);
+    res.status(500);
+  }
+});
+
+
 app.get('/api/models', async (req: Request, res: Response) => {
   try {
     const response = await llm?.models.list();
     res.json(response?.data || []);
   } catch (error) {
     console.error('Error fetching models: ', error);
-    res.status(500).json({ error: 'Failed to fetch models' });
+    res.status(500);
   }
 });
 
